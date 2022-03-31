@@ -6,19 +6,19 @@ Details: https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities
 
 ## Requirements
 
-1. Docker + Docker-Compose
+1. Docker
 2. Python3 + requests library
 
 ## Instructions
 
 1. Clone the repository
-2. Run the container: `docker-compose up --build`
+2. Build and run the container: `docker build . -t spring4shell && docker run -p 8080:8080 spring4shell`
 3. App should now be available at http://localhost:8080/helloworld/greeting
 
 ![WebPage](screenshots/webpage.png?raw=true)
 
 4. Run the exploit.py script: 
- `python3 .\exploit.py -url "http://localhost:8080/helloworld/greeting" -f shell`
+ `python exploit.py --url "http://localhost:8080/helloworld/greeting"`
 
 ![WebPage](screenshots/runexploit_2.png?raw=true)
 
