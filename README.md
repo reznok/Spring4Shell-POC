@@ -1,5 +1,8 @@
 # Spring4Shell PoC Application
 
+![spring4shellapplication](spring4shellapplication.png)
+
+
 This is a dockerized application that is vulnerable to the Spring4Shell vulnerability (CVE-2022-22965). Full Java source for the war is provided and modifiable, the war will get re-built whenever the docker image is built. The built WAR will then be loaded by Tomcat. There is nothing special about this application, it's a simple hello world that's based off Spring tutorials.
 
 
