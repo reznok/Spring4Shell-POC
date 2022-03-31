@@ -2,23 +2,24 @@
 
 This is a dockerized application that is vulnerable to the Spring4Shell vulnerability. Full Java source for the war is provided and modifiable, the war will get re-built whenever the docker image is built. There is nothing special about this application, it's a simple hello world that's based off Spring tutorials.
 
-Details: https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/
+
+Details: https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities
 
 ## Requirements
 
-1. Docker + Docker-Compose
+1. Docker
 2. Python3 + requests library
 
 ## Instructions
 
 1. Clone the repository
-2. Run the container: `docker-compose up --build`
+2. Build and run the container: `docker build . -t spring4shell && docker run -p 8080:8080 spring4shell`
 3. App should now be available at http://localhost:8080/helloworld/greeting
 
 ![WebPage](screenshots/webpage.png?raw=true)
 
-4. Run the exploit.py script: 
- `python3 .\exploit.py -url "http://localhost:8080/helloworld/greeting" -f shell`
+4. Run the exploit.py script:
+ `python exploit.py --url "http://localhost:8080/helloworld/greeting"`
 
 ![WebPage](screenshots/runexploit_2.png?raw=true)
 
