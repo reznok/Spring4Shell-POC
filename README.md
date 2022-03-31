@@ -2,7 +2,7 @@
 
 This is a dockerized application that is vulnerable to the Spring4Shell vulnerability. Full Java source for the war is provided and modifiable, the war will get re-built whenever the docker image is built. There is nothing special about this application, it's a simple hello world that's based off Spring tutorials.
 
-Details: https://www.cyberkendra.com/2022/03/spring4shell-details-and-exploit-code.html
+Details: https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/
 
 ## Requirements
 
