@@ -34,7 +34,7 @@ Details: https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities
 **Fixed!** ~~As of this writing, the container (possibly just Tomcat) must be restarted between exploitations. I'm actively trying to resolve this.~~
 
 
-Re-running the exploit will leave create a new artifact of {old_filename}_.jsp.
+Re-running the exploit will create an extra artifact file of {old_filename}_.jsp. 
 
 PRs/DMs [@Rezn0k](https://twitter.com/rezn0k) are welcome for improvements!
 
