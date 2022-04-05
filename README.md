@@ -5,6 +5,8 @@ This is a dockerized application that is vulnerable to the Spring4Shell vulnerab
 
 Details: https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities
 
+Having issues with the POC? Check out the Lunasec fork at: https://github.com/lunasec-io/Spring4Shell-POC, it's more actively maintained.
+
 ## Requirements
 
 1. Docker
